@@ -1,0 +1,34 @@
+{
+  "schemaVersion": 1,
+  "id": "unlockedcamera",
+  "version": "${version}",
+  "name": "unlockedcamera",
+  "description": "Unlocks the camera",
+  "authors": [],
+  "contact": {},
+  "license": "MIT",
+  "environment": "client",
+  "entrypoints": {
+    "client": [
+      "org.kr1v.unlockedcamera.client.UnlockedcameraClient"
+    ],
+    "main": [
+      "org.kr1v.unlockedcamera.Unlockedcamera"
+    ]
+  },
+  "mixins": [
+    "unlockedcamera.mixins.json",
+    {
+      "config": "unlockedcamera.client.mixins.json",
+      "environment": "client"
+    }
+  ],
+  "custom": {
+    "mixin": "client.MixinMixin"
+  },
+  "depends": {
+    "fabricloader": ">=${loader_version}",
+    "fabric": "*",
+    "minecraft": ">=1.14"
+  }
+}
