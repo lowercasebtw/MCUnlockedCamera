@@ -4,8 +4,6 @@
   "package": "org.kr1v.unlockedcamera.mixin",
   "compatibilityLevel": "JAVA_8",
   "mixins": [
-    "client.EntityMixin",
-    "client.PlayerEntityMixin"
   ],
   "injectors": {
     "defaultRequire": 1
