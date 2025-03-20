@@ -6,8 +6,7 @@
   "client": [
     "EntityMixin",
     "LivingEntityMixin",
-    "PlayerEntityMixin",
-    "LivingEntityRendererMixin"
+    "PlayerEntityMixin"
   ],
   "injectors": {
     "defaultRequire": 1
