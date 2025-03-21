@@ -1,6 +1,0 @@
-accessWidener v1 named
-accessible class net/minecraft/entity/Entity
-accessible field net/minecraft/entity/Entity pitch F
-accessible field net/minecraft/entity/Entity yaw F
-accessible field net/minecraft/entity/Entity vehicle Lnet/minecraft/entity/Entity;
-accessible field net/minecraft/entity/LivingEntity jumping Z

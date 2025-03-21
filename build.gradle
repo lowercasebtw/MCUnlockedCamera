@@ -80,10 +80,6 @@ java {
     withSourcesJar()
 }
 
-loom {
-    accessWidenerPath = file("src/main/resources/unlockedcamera.accesswidener")
-}
-
 jar {
     from("LICENSE") {
         rename { "${it}_${project.archivesBaseName}" }
