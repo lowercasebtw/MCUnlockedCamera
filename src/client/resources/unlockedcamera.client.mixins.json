@@ -4,6 +4,7 @@
   "package": "org.kr1v.unlockedcamera.client.mixin",
   "compatibilityLevel": "JAVA_8",
   "client": [
+    "BipedEntityModelMixin",
     "EntityMixin",
     "LivingEntityMixin",
     "PlayerEntityMixin"

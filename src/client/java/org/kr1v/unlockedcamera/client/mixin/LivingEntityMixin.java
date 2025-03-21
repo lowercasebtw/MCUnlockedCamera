@@ -34,8 +34,8 @@ public abstract class LivingEntityMixin extends Entity {
             this.setVelocity(vec3d.x, Math.max(f, vec3d.y), vec3d.z);
 
             if (this.isSprinting()) {
-
-                if ((this.pitch < -90 || this.pitch > 90) && UnlockedCameraConfigManager.getConfig().shouldInvertMovement) {
+                float normalizedPitch = ((this.getPitch() + 180) % 360 + 360) % 360 - 180;
+                if ((normalizedPitch < -90 || normalizedPitch > 90) && UnlockedCameraConfigManager.getConfig().shouldInvertMovement) {
                     float g = this.getYaw() * (float) (Math.PI / 180.0);
                     this.addVelocityInternal(new Vec3d(-MathHelper.sin(g) * -0.2, 0.0, MathHelper.cos(g) * -0.2));
                 } else {

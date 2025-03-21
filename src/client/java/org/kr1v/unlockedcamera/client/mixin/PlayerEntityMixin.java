@@ -24,13 +24,21 @@ public abstract class PlayerEntityMixin extends LivingEntity {
      */
     @Overwrite
     public void travel(Vec3d movementInput) {
+        float normalizedPitch = ((this.getPitch() + 180) % 360 + 360) % 360 - 180;
         if (this.hasVehicle()) {
             super.travel(movementInput);
         } else {
+            if (((normalizedPitch > 90.0F || normalizedPitch < -90.0F) &&
+                    UnlockedCameraConfigManager.getConfig().shouldInvertMovementSwimming) &&
+                    this.isSwimming()) {
+                movementInput = movementInput.multiply(-1, 1, -1);
+            } else if ((normalizedPitch > 90.0F || normalizedPitch < -90.0F) &&
+                    UnlockedCameraConfigManager.getConfig().shouldInvertMovement &&
+                    !this.isSwimming()) {
+                movementInput = movementInput.multiply(-1, 1, -1);
+            }
+
             if (this.isSwimming()) {
-                if ((pitch > 90.0F || pitch < -90.0F) && UnlockedCameraConfigManager.getConfig().shouldInvertMovementSwimming) {
-                    movementInput = movementInput.multiply(-1, 1, -1);
-                }
                 double d = getRotationVector().y;
                 double e = d < -0.2 ? 0.085 : 0.06;
                 if (d <= 0.0 || this.jumping ||
@@ -39,11 +47,6 @@ public abstract class PlayerEntityMixin extends LivingEntity {
                     this.setVelocity(vec3d.add(0.0, (d - vec3d.y) * e, 0.0));
                 }
             }
-            float pitch = this.getPitch();
-            if ((pitch > 90.0F || pitch < -90.0F) && UnlockedCameraConfigManager.getConfig().shouldInvertMovement) {
-                movementInput = movementInput.multiply(-1, 1, -1);
-            }
-
             if (((PlayerEntity)(Object)this).getAbilities().flying) {
                 double d = this.getVelocity().y;
                 super.travel(movementInput);
