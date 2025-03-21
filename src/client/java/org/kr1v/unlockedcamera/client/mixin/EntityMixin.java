@@ -3,6 +3,7 @@ package org.kr1v.unlockedcamera.client.mixin;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.data.DataTracked;
 import net.minecraft.world.entity.EntityLike;
+import org.kr1v.unlockedcamera.client.UnlockedCameraConfigManager;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Overwrite;
 import org.spongepowered.asm.mixin.Shadow;
@@ -41,8 +42,8 @@ public abstract class EntityMixin implements DataTracked, EntityLike {
     public void changeLookDirection(double cursorDeltaX, double cursorDeltaY) {
         float f = (float)cursorDeltaY * 0.15F;
         float g = (float)cursorDeltaX * 0.15F;
-        float normalizedPitch = ((pitch % 360) + 360) % 360;
-        if (normalizedPitch > 90 && normalizedPitch < 270) {
+        float normalizedPitch = ((pitch + 180) % 360 + 360) % 360 - 180;
+        if ((normalizedPitch > 90 || normalizedPitch < -90) && UnlockedCameraConfigManager.getConfig().shouldInvertMouse) {
             this.setYaw(this.getYaw() - g);
             this.prevYaw -= g;
         }

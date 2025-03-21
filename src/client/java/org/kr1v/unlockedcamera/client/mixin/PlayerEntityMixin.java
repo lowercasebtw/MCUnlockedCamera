@@ -28,13 +28,9 @@ public abstract class PlayerEntityMixin extends LivingEntity {
         if (this.hasVehicle()) {
             super.travel(movementInput);
         } else {
-            if (((normalizedPitch > 90.0F || normalizedPitch < -90.0F) &&
-                    UnlockedCameraConfigManager.getConfig().shouldInvertMovementSwimming) &&
-                    this.isSwimming()) {
-                movementInput = movementInput.multiply(-1, 1, -1);
-            } else if ((normalizedPitch > 90.0F || normalizedPitch < -90.0F) &&
-                    UnlockedCameraConfigManager.getConfig().shouldInvertMovement &&
-                    !this.isSwimming()) {
+            if ((normalizedPitch > 90.0F || normalizedPitch < -90.0F) &&
+                    ((UnlockedCameraConfigManager.getConfig().shouldInvertMovementSwimming) && this.isSwimming())
+                    || UnlockedCameraConfigManager.getConfig().shouldInvertMovement) {
                 movementInput = movementInput.multiply(-1, 1, -1);
             }
 
