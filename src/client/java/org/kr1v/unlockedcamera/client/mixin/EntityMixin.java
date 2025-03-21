@@ -1,29 +1,41 @@
 package org.kr1v.unlockedcamera.client.mixin;
 
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.data.DataTracked;
+import net.minecraft.world.entity.EntityLike;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Overwrite;
 import org.spongepowered.asm.mixin.Shadow;
 
 @Mixin(Entity.class)
-public abstract class EntityMixin {
+public abstract class EntityMixin implements DataTracked, EntityLike {
+    @Shadow
+    public abstract void setYaw(float yaw);
+    @Shadow
+    public abstract float getYaw();
+    @Shadow
+    public abstract float getPitch();
+    @Shadow
+    public abstract Entity getVehicle();
     @Shadow public float pitch;
+    @Shadow public float prevYaw;
+    @Shadow public float prevPitch;
 
     /**
-     * @author a
-     * @reason a
+     * @author kr1v
+     * @reason prevent pitch from clamping
      */
     @Overwrite
     public void setAngles(float yaw, float pitch) {
         float normalizedPitch = ((pitch + 180) % 360 + 360) % 360 - 180;
-        ((Entity)(Object)this).setYaw(yaw%360);
-        ((Entity)(Object)this).setPitch(normalizedPitch);
-        ((Entity)(Object)this).prevYaw = ((Entity)(Object)this).getYaw();
-        ((Entity)(Object)this).prevPitch = ((Entity)(Object)this).getPitch();
+        this.setYaw(yaw%360);
+        this.setPitch(normalizedPitch);
+        this.prevYaw = this.getYaw();
+        this.prevPitch = this.getPitch();
     }
     /**
-     * @author a
-     * @reason a
+     * @author kr1v
+     * @reason invert horizontal mouse movement if upside down
      */
     @Overwrite
     public void changeLookDirection(double cursorDeltaX, double cursorDeltaY) {
@@ -31,17 +43,17 @@ public abstract class EntityMixin {
         float g = (float)cursorDeltaX * 0.15F;
         float normalizedPitch = ((pitch % 360) + 360) % 360;
         if (normalizedPitch > 90 && normalizedPitch < 270) {
-            ((Entity)(Object)this).setYaw(((Entity)(Object)this).getYaw() - g);
-            ((Entity)(Object)this).prevYaw -= g;
+            this.setYaw(this.getYaw() - g);
+            this.prevYaw -= g;
         }
         else {
-            ((Entity) (Object) this).setYaw(((Entity) (Object) this).getYaw() + g);
-            ((Entity) (Object) this).prevYaw += g;
+            this.setYaw(this.getYaw() + g);
+            this.prevYaw += g;
         }
-        ((Entity)(Object)this).setPitch(((Entity)(Object)this).getPitch() + f);
-        ((Entity)(Object)this).prevPitch += f;
-        if (((Entity) (Object) this).getVehicle() != null) {
-            ((Entity) (Object) this).getVehicle().onPassengerLookAround(((Entity)(Object)this));
+        this.setPitch(this.getPitch() + f);
+        this.prevPitch += f;
+        if (this.getVehicle() != null) {
+            this.getVehicle().onPassengerLookAround((Entity)(Object)this);
         }
     }
 
