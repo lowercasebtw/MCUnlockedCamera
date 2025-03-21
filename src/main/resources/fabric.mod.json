@@ -2,9 +2,9 @@
   "schemaVersion": 1,
   "id": "unlockedcamera",
   "version": "${version}",
-  "name": "unlockedcamera",
+  "name": "Unlocked camera",
   "description": "Unlocks the camera",
-  "authors": [],
+  "authors": ["kr1v"],
   "contact": {},
   "license": "MIT",
   "environment": "client",
@@ -12,23 +12,16 @@
     "client": [
       "org.kr1v.unlockedcamera.client.UnlockedcameraClient"
     ],
-    "main": [
-      "org.kr1v.unlockedcamera.Unlockedcamera"
-    ],
     "modmenu": [
       "org.kr1v.unlockedcamera.client.ModMenuIntegration"
     ]
   },
   "mixins": [
-    "unlockedcamera.mixins.json",
     {
       "config": "unlockedcamera.client.mixins.json",
       "environment": "client"
     }
   ],
-  "custom": {
-    "mixin": "client.MixinMixin"
-  },
   "depends": {
     "fabricloader": ">=${loader_version}",
     "fabric": "*",
