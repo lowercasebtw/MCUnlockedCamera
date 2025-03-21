@@ -8,6 +8,7 @@
   "contact": {},
   "license": "MIT",
   "environment": "client",
+  "icon": "icon.png",
   "entrypoints": {
     "client": [
       "org.kr1v.unlockedcamera.client.UnlockedcameraClient"
