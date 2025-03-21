@@ -9,5 +9,4 @@ public class ModMenuIntegration implements ModMenuApi {
     public ConfigScreenFactory<?> getModConfigScreenFactory() {
         return parent -> UnlockedCameraConfigScreen.getConfigBuilder().build();
     }
-
 }

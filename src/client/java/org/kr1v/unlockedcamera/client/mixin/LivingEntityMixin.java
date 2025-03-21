@@ -21,8 +21,8 @@ public abstract class LivingEntityMixin extends Entity {
     @Shadow
     protected abstract float getJumpVelocity();
     /**
-     * @author a
-     * @reason a
+     * @author kr1v
+     * @reason make jumping while looking upside down speed you up instead of slow you down
      */
     @VisibleForTesting
     @Overwrite

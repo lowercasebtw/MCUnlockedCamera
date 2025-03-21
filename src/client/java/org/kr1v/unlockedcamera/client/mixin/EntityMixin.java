@@ -18,13 +18,14 @@ public abstract class EntityMixin implements DataTracked, EntityLike {
     public abstract float getPitch();
     @Shadow
     public abstract Entity getVehicle();
-    @Shadow public float pitch;
+
+    @Shadow private float pitch;
     @Shadow public float prevYaw;
     @Shadow public float prevPitch;
 
     /**
      * @author kr1v
-     * @reason prevent pitch from clamping
+     * @reason prevent pitch from clamping internally
      */
     @Overwrite
     public void setAngles(float yaw, float pitch) {

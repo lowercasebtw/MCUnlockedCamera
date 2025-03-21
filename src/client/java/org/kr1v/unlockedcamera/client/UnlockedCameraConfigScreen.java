@@ -15,7 +15,7 @@ public class UnlockedCameraConfigScreen implements ModMenuApi {
 
         ConfigBuilder builder = ConfigBuilder.create()
                 .setParentScreen(MinecraftClient.getInstance().currentScreen)
-                .setTitle(Text.of("Unlocked camera - general"));
+                .setTitle(Text.of("Unlocked camera"));
 
         builder.setSavingRunnable(UnlockedCameraConfigManager::save);
 
@@ -44,6 +44,5 @@ public class UnlockedCameraConfigScreen implements ModMenuApi {
                 .build());
 
         return builder;
-
     }
 }

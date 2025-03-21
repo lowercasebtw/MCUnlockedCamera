@@ -18,9 +18,8 @@ public abstract class PlayerEntityMixin extends LivingEntity {
         super(entityType, world);
     }
     /**
-     * Overwrites the travel method to adjust movement when swimming with inverted pitch.
-     * @author a
-     * @reason a
+     * @author kr1v
+     * @reason implement swimming upside down movement and looking upside down movement
      */
     @Overwrite
     public void travel(Vec3d movementInput) {

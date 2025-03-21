@@ -21,8 +21,27 @@ public class BipedEntityModelMixin<T extends BipedEntityRenderState> extends Ent
         super(root);
     }
 
+    @Unique
+    private static final float pi = Math.PI_f;
     /**
+     * @author kr1v
+     * @reason prevent arms going crazy when punching
      */
+    @ModifyExpressionValue(method = "animateArms",
+            at = @At(
+                    value = "FIELD",
+                    target = "Lnet/minecraft/client/model/ModelPart;pitch:F",
+                    opcode = Opcodes.GETFIELD
+            ))
+    protected float Injected(float pitch) {
+        float normalizedPitch = ((pitch + pi) % (2 * pi) + (2 * pi)) % (2 * pi) - pi;
+        if (normalizedPitch < -pi/2) return -pi-normalizedPitch;
+        else if (normalizedPitch > pi/2) return pi-normalizedPitch;
+        return normalizedPitch;
+    }
+
+    // functions for extending stuff
+
     @Override
     public void setArmAngle(Arm arm, MatrixStack matrices) {
 
@@ -38,22 +57,4 @@ public class BipedEntityModelMixin<T extends BipedEntityRenderState> extends Ent
         return null;
     }
 
-    @Unique
-    private static final float pi = Math.PI_f;
-    /**
-     * @author a
-     * @reason a
-     */
-    @ModifyExpressionValue(method = "animateArms",
-            at = @At(
-                    value = "FIELD",
-                    target = "Lnet/minecraft/client/model/ModelPart;pitch:F",
-                    opcode = Opcodes.GETFIELD
-            ))
-    protected float Injected(float pitch) {
-        float normalizedPitch = ((pitch + pi) % (2 * pi) + (2 * pi)) % (2 * pi) - pi;
-        if (normalizedPitch < -pi/2) return -pi-normalizedPitch;
-        else if (normalizedPitch > pi/2) return pi-normalizedPitch;
-        return normalizedPitch;
-    }
 }

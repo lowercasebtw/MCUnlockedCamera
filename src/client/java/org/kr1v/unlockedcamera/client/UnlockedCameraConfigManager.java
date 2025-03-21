@@ -14,7 +14,7 @@ public class UnlockedCameraConfigManager {
     private static final Logger log = LogManager.getLogger(UnlockedCameraConfigManager.class);
     private static File configFile;
     private static UnlockedCameraConfig config;
-    private static Gson gson = new GsonBuilder().setFieldNamingPolicy(FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES).setPrettyPrinting().create();
+    private static final Gson gson = new GsonBuilder().setFieldNamingPolicy(FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES).setPrettyPrinting().create();
 
     private static void prepareConfigFile() {
         if (UnlockedCameraConfigManager.configFile == null){
