@@ -27,7 +27,6 @@ public abstract class LivingEntityMixin extends Entity {
     @VisibleForTesting
     @Overwrite
     public void jump() {
-
         float f = this.getJumpVelocity();
         if (!(f <= 1.0E-5F)) {
             Vec3d vec3d = this.getVelocity();
@@ -35,15 +34,12 @@ public abstract class LivingEntityMixin extends Entity {
 
             if (this.isSprinting()) {
                 float normalizedPitch = ((this.getPitch() + 180) % 360 + 360) % 360 - 180;
-                if ((normalizedPitch < -90 || normalizedPitch > 90) && UnlockedCameraConfigManager.getConfig().shouldInvertMovement) {
-                    float g = this.getYaw() * (float) (Math.PI / 180.0);
+                float g = this.getYaw() * (float) (Math.PI / 180.0);
+                if ((normalizedPitch < -90 || normalizedPitch > 90) && UnlockedCameraConfigManager.getConfig().shouldInvertMovement)
                     this.addVelocityInternal(new Vec3d(-MathHelper.sin(g) * -0.2, 0.0, MathHelper.cos(g) * -0.2));
-                } else {
-                    float g = this.getYaw() * (float) (Math.PI / 180.0);
+                else
                     this.addVelocityInternal(new Vec3d(-MathHelper.sin(g) * 0.2, 0.0, MathHelper.cos(g) * 0.2));
-                }
             }
-
             this.velocityDirty = true;
         }
     }

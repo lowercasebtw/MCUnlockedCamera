@@ -1,15 +1,13 @@
 package org.kr1v.unlockedcamera.client.mixin;
 
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.data.DataTracked;
-import net.minecraft.world.entity.EntityLike;
 import org.kr1v.unlockedcamera.client.UnlockedCameraConfigManager;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Overwrite;
 import org.spongepowered.asm.mixin.Shadow;
 
 @Mixin(Entity.class)
-public abstract class EntityMixin implements DataTracked, EntityLike {
+public abstract class EntityMixin {
     @Shadow
     public abstract void setYaw(float yaw);
     @Shadow
