@@ -1,6 +1,6 @@
 # Minecraft camera unlocker
 
-A mod for Minecraft fabric that unlocks the camera, i.e. being able to look past 90 degrees up or down.
+A mod for Minecraft fabric 1.21.2+ that unlocks the camera, i.e. being able to look past 90 degrees up or down.
 
 ## Installation
 1. Download the latest release from the [modrinth page](https://modrinth.com/mod/unlockedcamera/versions) that suits your minecraft version
