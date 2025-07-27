@@ -10,46 +10,41 @@ import org.apache.logging.log4j.Logger;
 import java.io.*;
 
 public class UnlockedCameraConfigManager {
-
     private static final Logger log = LogManager.getLogger(UnlockedCameraConfigManager.class);
     private static File configFile;
     private static UnlockedCameraConfig config;
     private static final Gson gson = new GsonBuilder().setFieldNamingPolicy(FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES).setPrettyPrinting().create();
 
     private static void prepareConfigFile() {
-        if (UnlockedCameraConfigManager.configFile == null){
+        if (UnlockedCameraConfigManager.configFile == null) {
             UnlockedCameraConfigManager.configFile = new File(FabricLoader.getInstance().getConfigDir().toString(), "unlockedcamera.json");
         }
     }
 
     public static void initializeConfig() {
-        if (UnlockedCameraConfigManager.config != null){
-            return;
+        if (UnlockedCameraConfigManager.config == null) {
+            UnlockedCameraConfigManager.config = new UnlockedCameraConfig();
+            load();
         }
-        UnlockedCameraConfigManager.config = new UnlockedCameraConfig();
-        load();
     }
 
     public static void save() {
         prepareConfigFile();
         final String jsonString = gson.toJson(config);
         try {
-            final FileWriter fileWriter =  new FileWriter(UnlockedCameraConfigManager.configFile);
+            final FileWriter fileWriter = new FileWriter(UnlockedCameraConfigManager.configFile);
             try {
                 fileWriter.write(jsonString);
                 fileWriter.close();
-            }
-            catch (Throwable t) {
+            } catch (Throwable t) {
                 try {
                     fileWriter.close();
-                }
-                catch (Throwable exception) {
+                } catch (Throwable exception) {
                     t.addSuppressed(exception);
                 }
                 throw t;
             }
-        }
-        catch (IOException e) {
+        } catch (IOException e) {
             log.error("e: ", e);
         }
         load();
@@ -60,8 +55,7 @@ public class UnlockedCameraConfigManager {
         try {
             if (!UnlockedCameraConfigManager.configFile.exists()) {
                 save();
-            }
-            else {
+            } else {
                 final BufferedReader br = new BufferedReader(new FileReader(UnlockedCameraConfigManager.configFile));
                 final UnlockedCameraConfig parsed = gson.fromJson(br, UnlockedCameraConfig.class);
                 if (parsed != null) {
@@ -69,8 +63,7 @@ public class UnlockedCameraConfigManager {
                     System.out.println(parsed);
                 }
             }
-        }
-        catch (FileNotFoundException e) {
+        } catch (FileNotFoundException e) {
             log.error("e: ", e);
         }
     }
@@ -79,7 +72,7 @@ public class UnlockedCameraConfigManager {
         if (UnlockedCameraConfigManager.config == null) {
             UnlockedCameraConfigManager.config = new UnlockedCameraConfig();
         }
+
         return UnlockedCameraConfigManager.config;
     }
-
 }

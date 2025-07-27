@@ -1,32 +1,45 @@
 {
-  "schemaVersion": 1,
-  "id": "unlockedcamera",
-  "version": "${version}",
-  "name": "Unlocked camera",
-  "description": "Unlocks the camera",
-  "authors": ["kr1v"],
-  "contact": {},
-  "license": "MIT",
-  "environment": "client",
-  "icon": "icon.png",
-  "entrypoints": {
-    "client": [
-      "org.kr1v.unlockedcamera.client.UnlockedcameraClient"
-    ],
-    "modmenu": [
-      "org.kr1v.unlockedcamera.client.ModMenuIntegration"
-    ]
-  },
-  "mixins": [
-    {
-      "config": "unlockedcamera.client.mixins.json",
-      "environment": "client"
-    }
-  ],
-  "depends": {
-    "fabricloader": ">=${loader_version}",
-    "fabric": "*",
-    "minecraft": ">=1.21.2",
-    "cloth-config": "*"
-  }
+	"schemaVersion": 1,
+	"id": "unlockedcamera",
+	"version": "${version}",
+	"name": "Unlocked Camera",
+	"description": "Unlocks the camera rotation.",
+	"authors": [
+		"kr1v"
+	],
+	"contributors": [
+		"lowercasebtw"
+	],
+	"contact": {
+		"sources": "https://github.com/kr1viah/MCUnlockedCamera/",
+		"issues": "https://github.com/kr1viah/MCUnlockedCamera/issues"
+	},
+	"license": "MIT",
+	"icon": "icon.png",
+	"environment": "client",
+	"entrypoints": {
+		"client": [
+			"org.kr1v.unlockedcamera.client.UnlockedCameraClient"
+		],
+		"modmenu": [
+			"org.kr1v.unlockedcamera.client.ModMenuIntegration"
+		]
+	},
+	"mixins": [
+		{
+			"config": "unlockedcamera.client.mixins.json",
+			"environment": "client"
+		}
+	],
+	"custom": {
+		"modmenu": {
+			"update_checker": true
+		}
+	},
+	"depends": {
+		"fabricloader": ">=${loader_version}",
+		"fabric": "*",
+		"minecraft": ">=1.21.2",
+		"cloth-config": "*"
+	}
 }

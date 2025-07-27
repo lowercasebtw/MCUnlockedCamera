@@ -1,0 +1,12 @@
+{
+	"unlockedcamera.title": "Unlocked Camera",
+	"unlockedcamera.group.general": "General",
+	"unlockedcamera.enabled": "Enabled",
+	"unlockedcamera.enabled.description": "Toggle the mod functionality on or off",
+	"unlockedcamera.shouldInvertMovement": "Invert movement",
+	"unlockedcamera.shouldInvertMovement.description": "When looking upside down, will invert movement. Not recommended, will also invert strafing",
+	"unlockedcamera.shouldInvertMovementSwimming": "Invert movement swimming",
+	"unlockedcamera.shouldInvertMovementSwimming.description": "When looking upside down and swimming, will invert movement. Is recommended, very intuitive",
+	"unlockedcamera.shouldInvertMouse": "Invert mouse",
+	"unlockedcamera.shouldInvertMouse.description": "When looking upside down, will invert horizontal mouse movement. Is recommended, very intuitive"
+}
